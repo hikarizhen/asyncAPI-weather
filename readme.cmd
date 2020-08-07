@@ -74,3 +74,19 @@ weatherMeasured API 1.0.0 is ready!
   temperature: 35,
   sentAt: '2020-08-07T12:34:32.000Z' }
 
+******** weather1.0 **************
+投入コマンド
+
+#最初のサンプルは動けるか
+$ mqtt pub -t 'weather/measured' -h 'test.mosquitto.org' -m '{"cityId": 1, "temperature": 35, "sentAt": "2020-08-07T12:34:32.000Z"}'
+
+#新規したメソッドを試す
+チャネル：　'weather/1/0/:cityId/measured'
+パラメータ：cityId
+想定シーン：各地で測った気温をBrokerにPublishする。
+
+$ mqtt pub -t 'weather/1/0/100/measured' -h 'test.mosquitto.org' -m '{"temperature": 35, "sentAt": "2020-08-07T12:34:32.000Z"}'
+$ mqtt pub -t 'weather/1/0/101/measured' -h 'test.mosquitto.org' -m '{"temperature": 33, "sentAt": "2020-08-07T12:35:35.000Z"}'
+$ mqtt pub -t 'weather/1/0/102/measured' -h 'test.mosquitto.org' -m '{"temperature": 33, "sentAt": "2020-08-07T12:35:35.000Z"}'
+$ 
+
