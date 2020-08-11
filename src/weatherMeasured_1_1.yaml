@@ -1,0 +1,73 @@
+asyncapi: '2.0.0'
+info:
+  title: weatherMeasured API
+  version: '1.0.0'
+  description:
+    send weather info to the broker and that's it
+
+servers:
+  mosquitto:
+    url: mqtt://test.mosquitto.org
+    protocol: mqtt
+
+channels:
+  weather/measured:
+    publish:
+      summary: send measured temperature info to the broker.
+      operationId: onCityMeasured
+      message:
+        payload:
+          type: object
+          properties:
+            cityId:
+              type: integer
+              minimum: 0
+              description: city Id.
+            temperature:
+              type: integer
+              minimum: 0
+              description: measured temperature.
+            sentAt:
+              type: string
+              format: date-time
+              description: Date and time when the message was sent.
+  weather/1/0/{cityId}/measured:
+    parameters:
+      cityId:
+        $ref: '#/components/parameters/cityId'
+    publish:
+      summary: send measured temperature info to the broker.
+      operationId: receiveCityMeasurement
+      message:
+        payload:
+          type: object
+          properties:
+            temperature:
+              type: integer
+              minimum: 0
+              description: measured temperature.
+            sentAt:
+              type: string
+              format: date-time
+              description: Date and time when the message was sent.
+    subscribe:
+      summary: user subscribe the channel
+      operationId: subscribeCityMeasurement
+      message:
+        payload:
+          type: object
+          properties:
+            userId:
+              type: integer
+              minimum: 0
+              description: user Id.
+            sentAt:
+              type: string
+              format: date-time
+              description: Date and time when the message was sent.
+components:
+  parameters:
+    cityId:
+      description: The ID of the city.
+      schema:
+        type: string
