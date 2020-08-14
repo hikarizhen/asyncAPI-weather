@@ -1,0 +1,21 @@
+default:
+  app:
+    name: weatherMeasured API
+    version: 1.0.0
+
+  broker:
+    mqtt:
+      url: mqtt://test.mosquitto.org
+      topics: ["weather/measured","weather/1/0/+/measured/#"]
+      qos:
+      protocol: mqtt
+      retain:
+      subscribe: true
+
+development:
+
+test:
+
+staging:
+
+production:
