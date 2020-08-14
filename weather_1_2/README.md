@@ -27,5 +27,4 @@ weatherMeasured API 1.0.0 is ready!
 $ mqtt pub -t 'weather/1/0/100/measured' -h 'test.mosquitto.org' -m '{"temperature": 51, "sentAt": "2020-08-07T12:35:35.000Z"}'
 
 $ mqtt -subscribe 'weather/1/0/100/measured' -h 'test.mosquitto.org' -m '{"userId": 99555, "sentAt": "2020-08-12T12:35:35.000Z"}'
-
-
+{"temperature": 52, "sentAt": "2020-08-07T12:35:35.000Z"}
