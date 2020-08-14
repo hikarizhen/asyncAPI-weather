@@ -13,7 +13,13 @@ handler.receiveCityMeasurement = async ({message}) => {
   // Implement your business logic here...
   console.log(cyan.underline(`receiveCityMeasurement `), gray(' begin'), '\n');
   console.log(message.payload.temperature + " is collected and will be publish to the broker.");
-
+  if (message.payload.temperature > 50) {
+    console.log("well , can you burn it?");
+  } else if (message.payload.temperature < -50)  {
+    console.log("well , every thing will be frozen.");
+  } else {
+    console.log("we are living well.");
+  }
 };
 /**
  * user subscribe the channel
