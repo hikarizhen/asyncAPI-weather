@@ -90,3 +90,36 @@ $ mqtt pub -t 'weather/1/0/101/measured' -h 'test.mosquitto.org' -m '{"temperatu
 $ mqtt pub -t 'weather/1/0/102/measured' -h 'test.mosquitto.org' -m '{"temperature": 33, "sentAt": "2020-08-07T12:35:35.000Z"}'
 $ 
 
+********************** weather1.1 ****************************
+■言語
+　Nodejs
+ 
+ $ node --version
+ v8.11.3
+
+ 依存Lib
+ $ npm install mqtt
+ 
+■pub　実装サンプル
+
+　・　10秒ごとに　生成した温度（乱数）　を　Brokerに送信する。
+　・　生成した温度をチェックをかけて、（0 - 50)以外の温度であれば、Borkerに送信しない。
+　　　　→　もともとは　async-validator で実装する予定ですが、実行中の例外により、
+  　　　　簡単なチェック処理をかけました。
+      
+  ・　起動コマンド
+     東京（CityID：100）
+     $ node publisher_tyo.js
+     
+     大阪（CityID：101）
+     $ node publisher_osaga.js
+     
+■sub　実装サンプル
+　・気になるの都市のチャネルをSubscribe する。
+　・Brokerから受信したメッセージを分析し、適当な提示をログに出力する。
+ 
+      東京（CityID：100）
+     $ node subscriber_user_tyo.js
+     
+     大阪（CityID：101）
+     $ node subscriber_user_osaga.js
